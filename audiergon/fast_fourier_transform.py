@@ -78,3 +78,25 @@ def iterative_ifft(arr):
                 w *= w_m
     
     return A / l # divided the array by length (fast because of numpy vectorisation from `bit_reverse`)
+
+def iterative_fftfreq(l, d=1.0):
+    """
+    An iterative calculation of the frequencies for the FFT output.
+    """
+
+    if (l & (l - 1)) != 0:
+        raise ValueError("l of frame must be a power of 2. Got " + str(l))
+
+    val = 1.0 / (l * d) #spacing between frequency bins on complex plane
+    
+    results = [0.0] * l
+    
+    m_2 = l >> 1 #midpoint
+
+    for j in range(m_2):
+        results[j] = j * val
+
+    for j in range(m_2, l):
+        results[j] = (j - l) * val
+
+    return results
