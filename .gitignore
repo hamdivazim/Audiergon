@@ -224,3 +224,6 @@ __marimo__/
 
 .gradio/
 .local/
+
+# read the docs
+audiergon/_build/
