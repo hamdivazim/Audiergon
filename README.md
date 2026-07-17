@@ -27,9 +27,6 @@ A local analysis tool that uses your microphone to graphically show the Frequenc
 
 ## Upcoming Features
 
-### Audio Compression Tool
-Utilises the concept that high frequency sound gets masked when lower frequencies are louder.
-
 ### AWS Cloud Implementation and UI
 A streamlined version of the FFT designed to process audio as fast as possible entirely within the cloud.
 * Planning to use S3 Event Triggers combined with Lambda and a simple Vercel/Next.js frontend.
