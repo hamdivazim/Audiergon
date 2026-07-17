@@ -1,14 +1,34 @@
 """
 An implementation of a Fast Fourier Transform, Inverse Fast Fourier Transform, and a frequency calculator for the FFT.
+
+This library is part of `audiergon`, built by Hamd Waseem (https://github.com/hamdivazim/Audiergon)
+
+Available Methods:
+    - iterative_fft
+    - iterative_ifft
+    - iterative_fftfreq
+
+Dependencies:
+    - cmath
+    - audiergon.bit_reverse
 """
 
-import numpy as np
 import cmath 
 from .bit_reverse import bit_reverse
 
 def iterative_fft(arr):
     """
     An iterative Fast Fourier Transform implementation within Python.
+
+    Computes the one-dimensional discrete Fourier Transform (DFT) of an array using the Cooley-Tukey algorithm.
+
+    :param arr: The time-domain samples to be transformed.
+    :type arr: list or numpy.ndarray
+
+    :return: A list of complex numbers representing the frequency spectrum.
+    :rtype: list
+
+    :raises ValueError: If the length of the array is not a power of two.
     """
 
     l = len(arr)
@@ -45,6 +65,16 @@ def iterative_fft(arr):
 def iterative_ifft(arr):
     """
     An iterative Inverse Fast Fourier Transform implementation within Python.
+
+    Computes the inverse discrete Fourier Transform (DFT) to convert a frequency-domain array back into the time-domain, utilising the Cooley-Tukey algorithm.
+
+    :param arr: The complex frequency-domain coefficients.
+    :type arr: list or numpy.ndarray
+
+    :return: An array of numbers scaled down by the sequence length.
+    :rtype: numpy.ndarray
+
+    :raises ValueError: If the length of the array is not a power of two.
     """
 
     l = len(arr)
@@ -80,6 +110,19 @@ def iterative_ifft(arr):
 def iterative_fftfreq(l, d=1.0):
     """
     An iterative calculation of the frequencies for the FFT output.
+
+    Generates the sample frequencies for each bin location based on the total sequence window length and spacing interval.
+
+    :param l: Window length (number of bins).
+    :type l: int
+
+    :param d: Sample spacing/interval (inverse of the sampling rate), defaults to 1.0.
+    :type d: float, optional
+
+    :return: A list containing the calculated frequency values for each bin.
+    :rtype: list
+    
+    :raises ValueError: If the length of the frame is not a power of two.
     """
 
     if (l & (l - 1)) != 0:
