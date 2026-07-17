@@ -8,15 +8,17 @@ Welcome to Audiergon's Documentation!
 Modules
 =======
 
-.. automodule:: fast_fourier_transform
+.. automodule:: audiergon.fast_fourier_transform
    :members:
    :undoc-members:
    :show-inheritance:
-.. automodule:: bit_reverse
+
+.. automodule:: audiergon.bit_reverse
    :members:
    :undoc-members:
    :show-inheritance:
-.. automodule:: process
+   
+.. automodule:: audiergon.process
    :members:
    :undoc-members:
    :show-inheritance:
