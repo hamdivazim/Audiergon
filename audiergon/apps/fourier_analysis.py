@@ -5,7 +5,7 @@ Shows the Frequency Domain and Time Domain for an input audio file
 import numpy as np
 import matplotlib.pyplot as plt
 import wave
-import fast_fourier_transform
+from audiergon import fast_fourier_transform
 import logging
 
 logging.basicConfig(

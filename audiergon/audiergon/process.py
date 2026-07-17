@@ -5,9 +5,10 @@ Utilises a Hann window to smooth frame bondaries
 
 import wave
 import cmath
-from fast_fourier_transform import iterative_fft, iterative_ifft
+import tempfile
+from .fast_fourier_transform import iterative_fft, iterative_ifft
 
-def process_audio(audio_filepath, bass_gain, low_mid_gain, mid_gain, high_mid_gain, treble_gain):
+def process_audio(audio_filepath, bass_gain, low_mid_gain, mid_gain, high_mid_gain, treble_gain, output=None):
     with wave.open(audio_filepath, 'rb') as wav_in:
         nchannels = wav_in.getnchannels()
         sampwidth = wav_in.getsampwidth()
@@ -78,7 +79,13 @@ def process_audio(audio_filepath, bass_gain, low_mid_gain, mid_gain, high_mid_ga
         out_val = max(-32768, min(32767, out_val))
         output_samples.append(out_val)
 
-    output_path = "result.wav"
+    if output is None:
+        temp_file = tempfile.NamedTemporaryFile(suffix=".wav", delete=False)
+        output_path = temp_file.name
+        temp_file.close()
+    else:
+        output_path = output
+        
     with wave.open(output_path, 'wb') as wav_out:
         wav_out.setnchannels(1)
         wav_out.setsampwidth(2)

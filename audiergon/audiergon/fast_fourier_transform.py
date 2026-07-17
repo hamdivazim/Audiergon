@@ -1,12 +1,10 @@
 """
-My implementation of a fast fourier transform.
-
-
+An implementation of a Fast Fourier Transform, Inverse Fast Fourier Transform, and a frequency calculator for the FFT.
 """
 
 import numpy as np
 import cmath 
-from bit_reverse import bit_reverse
+from .bit_reverse import bit_reverse
 
 def iterative_fft(arr):
     """

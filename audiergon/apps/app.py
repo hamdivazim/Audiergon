@@ -1,5 +1,5 @@
 import gradio as gr
-from process import process_audio
+from audiergon.process import process_audio
 
 print("Launching Audiergon...")
 interface = gr.Interface(

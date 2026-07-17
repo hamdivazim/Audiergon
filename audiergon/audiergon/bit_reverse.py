@@ -1,8 +1,10 @@
+"""
+Contains three implementations of a bit reverse copy algorithm for the FFT.
+"""
+
 import numpy as np
 
 """
-Contains three implementations of a bit reverse copy algorithm for the FFT.
-
 bit_reverse_lessefficient was my first attempt at doing a bit reverse
 bit_reverse_standard is the same implementation but using bitwise operators. It's not a lot more efficient compared without them though, but an improvement is an improvement
 bit_reverse is the implementation using numpy vectorisation so the rearrangement is a LOT more efficient :)

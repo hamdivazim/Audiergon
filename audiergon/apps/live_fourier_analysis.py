@@ -1,7 +1,7 @@
 import sounddevice as sd
 import numpy as np
 import matplotlib.pyplot as plt
-from fast_fourier_transform import iterative_fft
+from audiergon.fast_fourier_transform import iterative_fft
 
 FS = 44100
 BLOCKSIZE = 1024
