@@ -2,6 +2,8 @@
 Local Audiergon App
 """
 
+__version__ = "0.1.0"
+
 import gradio as gr
 import numpy as np
 import matplotlib.pyplot as plt
