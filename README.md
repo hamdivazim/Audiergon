@@ -8,7 +8,7 @@
 
 <div align="center">
     <h5> 
-        <a href="#">☁️ Cloud Demo (WIP)</a> | 
+        <a href="https://audiergon.hamdtel.co.uk/">☁️ Cloud Demo</a> | 
         <a href="https://pypi.org/project/audiergon/">🐍 PyPI page</a> | 
         <a href="https://youtube.com/playlist?list=PLAbLVCg6_PqQ&si=2yWFeVAcUrOT_ob_">▶️ YouTube Series</a> | 
         <a href="https://audiergon.readthedocs.io/en/latest/">📝 Docs</a>
@@ -46,8 +46,12 @@ Interactive standalone tools located in the `apps/` directory to run on your loc
 * **Live Fourier Analysis**
     * A real-time analysis tool that uses your microphone to visualise the sound frequencies of your environment in real time. (`live_fourier_analysis.py`)
 
-### 3 - AWS Cloud Implementation (WIP)
-Coming soon!
+### 3 - AWS Cloud Implementation
+The cloud implementation of `audiergon`, built using AWS, Next.js and TypeScript.
+* **CDK Template**
+    * A reusable CDK template in Python to deploy a Lambda function containing the `audiergon` runtime, as well as an API to use it. Located at `cloud/aws/cdk`
+* **Cloud Frontend**
+    * A simple frontend built with Next.js to use Audiergon cloud immediately (using my hosted instance) or your own.
 
 ## Getting Started
 
@@ -67,15 +71,39 @@ pip install audiergon[app]
 ```
 Go into `audiergon/apps` and try out any of the available apps.
 
-### Cloud Audiergon (WIP)
-You can use my hosted instance online at any time, or you can host your own.
+### Cloud Audiergon
+You can use my [hosted instance](https://audiergon.hamdtel.co.uk/) online at any time, or you can host your own.
 
-#### Self-hosting Cloud Audiergon
-Clone the repository:
+#### Prerequisites
+* Node.js
+* AWS CLI configured with your credentials (`aws configure`)
+* AWS CDK CLI (`npm install -g aws-cdk`)
+* Cloned copy of Audiergon (`git clone https://github.com/hamdivazim/Audiergon.git`)
+
+#### CDK Deployment
+Navigate to your CDK directory and install the required packages:
 ```bash
-git clone https://github.com/hamdivazim/Audiergon.git
+cd cdk
+npm install
 ```
-Navigate to `cloud/` and use the CDK template.
+Bootstrap CDK if you have never used it in your current region:
+```bash
+cdk bootstrap
+```
+Synthesise and deploy the CDK stack
+```bash
+cdk deploy
+```
+The command line will contain an output for an API URL. Copy it into the frontend through the settings button.
+
+#### Modifying Limits
+My hosted instance of Audiergon has a 5s limit on audio length. To change these, go to `cloud/lambda/handler.py` and change line 40 to any limit you want. Keep in mind that you may need to raise the allocated memory (and CPU) for Lambda. Change this in the CDK stack Python file.
+
+#### Tearing Down Resources
+If you no longer need a self-hosted instance of Audiergon, use the following command:
+```bash
+cdk destroy
+```
 
 ## Contributing
 Audiergon is a 100% open source project! Any contributions are greatly appreciated :)

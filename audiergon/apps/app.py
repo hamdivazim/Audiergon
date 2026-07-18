@@ -4,7 +4,7 @@ Local Audiergon App
 https://github.com/hamdivazim/Audiergon
 """
 
-__version__ = "0.1.2"
+__version__ = "0.2.0"
 
 import gradio as gr
 import numpy as np
