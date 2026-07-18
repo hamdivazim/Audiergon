@@ -27,5 +27,5 @@ __all__ = [
     "apply_equaliser",
 ]
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 __author__ = "Hamd Waseem"
