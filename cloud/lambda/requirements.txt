@@ -1,0 +1,2 @@
+audiergon>=0.1.2
+numpy<2.3.0
