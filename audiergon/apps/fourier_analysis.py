@@ -1,5 +1,7 @@
 """
 Shows the Frequency Domain and Time Domain for an input audio file
+
+https://github.com/hamdivazim/Audiergon
 """
 
 import numpy as np

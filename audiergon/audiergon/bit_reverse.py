@@ -1,6 +1,8 @@
 """
 Contains three implementations of a bit reverse copy algorithm for the FFT.
 
+This library is part of `audiergon`, built by Hamd Waseem (https://github.com/hamdivazim/Audiergon)
+
 Available Methods:
     - bit_reverse_lessefficient
     - bit_reverse_standard

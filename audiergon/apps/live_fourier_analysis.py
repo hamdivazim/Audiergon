@@ -1,5 +1,7 @@
 """
 Local Fourier analysis live through microphone input
+
+https://github.com/hamdivazim/Audiergon
 """
 
 import sounddevice as sd

@@ -1,8 +1,10 @@
 """
 Local Audiergon App
+
+https://github.com/hamdivazim/Audiergon
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 import gradio as gr
 import numpy as np

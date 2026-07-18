@@ -1,41 +1,103 @@
-# Audiergon
+<div align="center">
+  <img src="logo.png" width="80%">
+</div>
+
+<div align="center">
+    <h1>Audiergon</h1>
+</div>
+
+<div align="center">
+    <h5> 
+        <a href="#">☁️ Cloud Demo (WIP)</a> | 
+        <a href="https://pypi.org/project/audiergon/">🐍 PyPI page</a> | 
+        <a href="https://youtube.com/playlist?list=PLAbLVCg6_PqQ&si=2yWFeVAcUrOT_ob_">▶️ YouTube Series</a> | 
+        <a href="https://audiergon.readthedocs.io/en/latest/">📝 Docs</a>
+  </h5>
+</div>
+
 A suite of audio-related tools built with Python and AWS to demonstrate the use of the Fourier Transform!
 
-## Features
+## Project Outline
+Audiergon has two main parts: Audiergon local and Audiergon cloud.
+* You can find the local Python implementation of the `audiergon` library and its apps in the `audiergon/` directory.
+    * Inside this directory, `audiergon/` is the Python library.
+    * `apps/` contains the Gradio interface for EQ Control and Fourier Analysis, as well as standalone Fourier Analysis tools
+    * `docs/` contains the ReadTheDocs configuration information for the documentation.
+* You can find the cloud implementation of Audiergon in the `cloud/` directory.
+    * WIP: Writing the CDK template and frontend for EQ Control in the cloud.
 
-### Cooley-Tukey Fast Fourier Transform
-An implementation of the Cooley-Tukey FFT in Python, in `fast_fourier_transform.py`. It contains the following three methods:
-* `iterative_fft()` performs a forward FFT
-* `iterative_ifft()` performs a backward FFT
-* `iterative_fftfreq()` calculates the frequencies outputted by an FFT
+## Project Features
 
-### Local EQ Filter
-A local Gradio client that uses the FFT to modify frequency bins in inputted audio files to analyse them.
-* Requires the `gradio` library
-* Uses `process.py` (Hann Window and Overlap-Add) for processing and `local_gradio.py` for the UI
+### 1 - `audiergon` Python Library
+The basis of the project, containing many algorithm implementations built from scratch for Digital Signal Processing.
+* **Cooley-Tukey FFT Processor** 
+    * A pure Python implementation of the iterative Fast Fourier Transform and Inverse Fast Fourier Transform (`iterative_fft()`, `iterative_ifft()`, `iterative_fftfreq`).
+* **Windowing & Overlap-Add**
+    * Built-in support for Hann windowing and Overlap-Add (OLA) processing (`generate_hann_window()`, `process_audio()`)
+* **Utility Algorithms**
+    * Algorithms such as `bit_reverse()` and `apply_equaliser()`
 
-### Fourier Analysis
-A local analysis tool to visually graph the Frequency Domain and Time Domain of a sound file.
-* Requires inputted audio files to be formatted as `.wav` files using a Mono PCM codec.
-    * Use `ffmpeg -i in.mp3 -acodec pcm_s16le -ac 1 -ar 44100 out.wav` in a command line to convert
-* Uses the `fourier_analysis.py` file
+### 2 - Local Applications
+Interactive standalone tools located in the `apps/` directory to run on your local machine
+* **Gradio EQ Filter UI**
+    * A web-based local interface that lets you upload audio files, visualise their frequency components, and dynamically adjust frequency bins using the FFT. (`app.py`)
+* **Static Fourier Analysis**
+    * A graphing tool that breaks down any mono PCM .wav file into its distinct Frequency Domain and Time Domain graphs. (`fourier_analysis.py`)
+* **Live Fourier Analysis**
+    * A real-time analysis tool that uses your microphone to visualise the sound frequencies of your environment in real time. (`live_fourier_analysis.py`)
 
-### Live Fourier Analysis
-A local analysis tool that uses your microphone to graphically show the Frequency Domain of the ambient sound around you!
-* Requires the `sounddevice` library
-* Uses the `live_fourier_analysis.py` file
+### 3 - AWS Cloud Implementation (WIP)
+Coming soon!
 
-## Upcoming Features
+## Getting Started
 
-### AWS Cloud Implementation and UI
-A streamlined version of the FFT designed to process audio as fast as possible entirely within the cloud.
-* Planning to use S3 Event Triggers combined with Lambda and a simple Vercel/Next.js frontend.
+### Local Audiergon App
+#### Prerequisites
+* Python 3.9 or higher
+#### Local Installation
+Clone the repository and install the dependencies:
+```bash
+git clone https://github.com/hamdivazim/Audiergon.git
+cd Audiergon
+pip install .
+```
+Go into `audiergon/apps` and try out any of the available apps.
+
+### Cloud Audiergon (WIP)
+You can use my hosted instance online at any time, or you can host your own.
+
+#### Self-hosting Cloud Audiergon
+Clone the repository:
+```bash
+git clone https://github.com/hamdivazim/Audiergon.git
+```
+Navigate to `cloud/` and use the CDK template.
+
+## Contributing
+Audiergon is a 100% open source project! Any contributions are greatly appreciated :)
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feat/your-feature`)
+3. Commit your Changes (`git commit -m 'Add a new feature'`)
+4. Push to the Branch (`git push origin feat/your-feature`)
+5. Open a Pull Request
+
+*If you find this project helpful or interesting, please consider leaving a ⭐ star on the repository to show your support!*
 
 ## Devlog
+
+Check out the [Audiergon Devlog Playlist](https://youtube.com/playlist?list=PLAbLVCg6_PqQ&si=2yWFeVAcUrOT_ob_) on YouTube for a detailed run-through of the theory behind the Fourier Transform!
+
+<kbd>
+<a href="https://youtube.com/playlist?list=PLAbLVCg6_PqQ&si=2yWFeVAcUrOT_ob_"><img src="logo.png" alt="Watch the playlist!" width=50%></a>
+</kbd>
+
+### 
+
 Check out [Audiergon Devlog Part 1](https://youtu.be/Kwgaz00gUXw) on YouTube for a detailed run-through of the theory behind the Fourier Transform!
 
 <kbd>
-<a href="https://youtu.be/Kwgaz00gUXw"><img src="https://img.youtube.com/vi/Kwgaz00gUXw/maxresdefault.jpg" alt="Watch the video!"></a>
+<a href="https://youtu.be/Kwgaz00gUXw"><img src="https://img.youtube.com/vi/Kwgaz00gUXw/maxresdefault.jpg" alt="Watch the video!" width=50%></a>
 </kbd>
 
 ## License

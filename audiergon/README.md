@@ -1,45 +1,116 @@
-# Audiergon Local
-A suite of audio-related tools built with Python and AWS to demonstrate the use of the Fourier Transform!
 
-## Features
+<div align="center">
+  <img src="https://raw.githubusercontent.com/hamdivazim/Audiergon/main/logo.png" width="80%">
 
-### Cooley-Tukey Fast Fourier Transform
-An implementation of the Cooley-Tukey FFT in Python, in `fast_fourier_transform.py`. It contains the following three methods:
-* `iterative_fft()` performs a forward FFT
-* `iterative_ifft()` performs a backward FFT
-* `iterative_fftfreq()` calculates the frequencies outputted by an FFT
+  <h1>Audiergon</h1>
 
-### Local EQ Filter
-A local Gradio client that uses the FFT to modify frequency bins in inputted audio files to analyse them.
-* Requires the `gradio` library
-* Uses `process.py` (Hann Window and Overlap-Add) for processing and `local_gradio.py` for the UI
+  <p>A Python Digital Signal Processing (DSP) processor powered by a custom Cooley-Tukey Fast Fourier Transform implementation.</p>
 
-### Fourier Analysis
-A local analysis tool to visually graph the Frequency Domain and Time Domain of a sound file.
-* Requires inputted audio files to be formatted as `.wav` files using a Mono PCM codec.
-    * Use `ffmpeg -i in.mp3 -acodec pcm_s16le -ac 1 -ar 44100 out.wav` in a command line to convert
-* Uses the `fourier_analysis.py` file
+  <h5> 
+    <a href="https://github.com/hamdivazim/Audiergon">💻 GitHub Repo</a> | 
+    <a href="https://pypi.org/project/audiergon/">🐍 PyPI Page</a> | 
+    <a href="https://audiergon.readthedocs.io/en/latest/">📝 Docs</a>
+  </h5>
+</div>
 
-### Live Fourier Analysis
-A local analysis tool that uses your microphone to graphically show the Frequency Domain of the ambient sound around you!
-* Requires the `sounddevice` library
-* Uses the `live_fourier_analysis.py` file
+## Key Features
 
-## Upcoming Features
+* **Cooley-Tukey FFT**
+    * Pure Python iterative implementations of 1D Forward and Inverse Fast Fourier Transforms.
+* **Optimised Bit Reversal Permutations**
+    * Fast bit-reversal indexing using native compiled C-speed NumPy indexing.
+* **Overlap-Add Audio EQ Pipeline**
+    * Complete pipeline for applying Hann windowing, processing frames through an equaliser, and rebuilding raw 16-bit PCM `.wav` streams without clicking or imaginary artifacts.
 
-### Audio Compression Tool
-Utilises the concept that high frequency sound gets masked when lower frequencies are louder.
+## Installation
 
-### AWS Cloud Implementation and UI
-A streamlined version of the FFT designed to process audio as fast as possible entirely within the cloud.
-* Planning to use S3 Event Triggers combined with Lambda and a simple Vercel/Next.js frontend.
+Install the library using `pip`:
 
-## Devlog
-Check out [Audiergon Devlog Part 1](https://youtu.be/Kwgaz00gUXw) on YouTube for a detailed run-through of the theory behind the Fourier Transform!
+```bash
+pip install audiergon
+```
 
-<kbd>
-<a href="https://youtu.be/Kwgaz00gUXw"><img src="https://img.youtube.com/vi/Kwgaz00gUXw/maxresdefault.jpg" alt="Watch the video!"></a>
-</kbd>
+### Dependencies
+
+* `numpy`
+
+## Quick Start & API Examples
+
+### 1 - Basic FFT & Frequency Analysis
+
+Compute the Fourier Transform of a simple signal array and generate its matching frequency bins.
+
+```python
+from audiergon import iterative_fft, iterative_fftfreq
+
+# Input array must have a length that is a power of 2
+signal = [1.0, 0.5, -0.2, 0.1, 0.8, -0.4, 0.3, -0.1]
+sampling_interval = 1.0 / 44100  # 44.1 kHz Sample Rate
+
+# 1. Perform Forward FFT
+frequency_coefficients = iterative_fft(signal)
+
+# 2. Compute matching frequencies for the spectrum bins
+frequencies = iterative_fftfreq(len(signal), d=sampling_interval)
+
+print("Frequency spectrum coefficients:", frequency_coefficients)
+print("Calculated bin frequencies (Hz):", frequencies)
+```
+
+### 2 - Equalizing an Audio File
+
+Process an audio track using the built-in Overlap-Add (OLA) processing pipeline.
+
+```python
+from audiergon import process_audio
+
+# Modify the frequency bands using multipliers
+output_path = process_audio(
+    audio_filepath="in.wav",
+    bass_gain=1.5,
+    low_mid_gain=1.2,
+    mid_gain=1.0,
+    high_mid_gain=0.8,
+    treble_gain=0.5,
+    output="out.wav"
+)
+```
+
+The `process_audio` pipeline requires 16-bit Mono PCM WAV files. You can  convert standard formats using `ffmpeg`:
+```bash
+ffmpeg -i in.mp3 -acodec pcm_s16le -ac 1 -ar 44100 out.wav
+```
+
+## API Overview
+
+### `audiergon.fast_fourier_transform`
+
+* `iterative_fft(arr)`
+    * Computes the 1D Discrete Fourier Transform (DFT).
+    * *Input:* `list` or `numpy.ndarray` (length must be a power of 2).
+    * *Returns:* `list` of complex numbers tracking amplitude and phase.
+
+* `iterative_ifft(arr)`
+    * Computes the Inverse DFT converting frequencies back to the time domain.
+    * *Returns:* `numpy.ndarray` scaled by the sequence length.
+
+* `iterative_fftfreq(l, d=1.0)`
+    * Generates frequency values for each bin location.
+
+### `audiergon.process`
+
+* `process_audio(audio_filepath, bass_gain, low_mid_gain, mid_gain, high_mid_gain, treble_gain, output=None)`
+    * Applies windowed equalisation filters over an absolute file path.
+* `generate_hann_window(frame_size)`
+    * Generates a list containing real Hann coefficients to smooth frame boundary edges.
+* `apply_equaliser(transformed, frame_size, framerate, ...)`
+    * Sirectly apply scale gains on an existing complex frequency domain segment.
+
+### `audiergon.bit_reverse`
+
+* `bit_reverse(arr, convert_to_complex=False)`
+    * Applies bit-reversal array permutations optimized with high-performance NumPy vector operations.
 
 ## License
-Audiergon is licensed under the [MIT License](LICENSE)
+
+Audiergon is open-source software licensed under the [MIT License](https://github.com/hamdivazim/Audiergon/raw/main/LICENSE).

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "audiergon"
-version = "0.1.0"
+version = "0.1.1"
 description = "A custom educational DSP suite featuring a from-scratch iterative FFT implementation - built by Hamd Waseem"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -12,11 +12,16 @@ license = { text = "MIT" }
 authors = [
     { name = "Hamd Waseem", email = "hamd.waseem@hamdtel.co.uk" }
 ]
+keywords = ["audio", "audio-analysis", "audiergon", "fourier", "cooley-tukey", "hann", "ola", "dsp"]
 classifiers = [
+    "Development Status :: 4 - Beta",
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Topic :: Multimedia :: Sound/Audio :: Analysis",
+    "Natural Language :: English",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
 ]
 dependencies = [
     "numpy>=1.20.0",
@@ -28,6 +33,7 @@ dependencies = [
 [project.urls]
 "Homepage" = "https://github.com/hamdivazim/Audiergon"
 "Bug Tracker" = "https://github.com/hamdivazim/Audiergon/issues"
+"Documentation" = "https://audiergon.readthedocs.io/en/latest/"
 
 [tool.setuptools]
 packages = ["audiergon"]
