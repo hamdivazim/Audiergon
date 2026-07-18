@@ -61,6 +61,10 @@ git clone https://github.com/hamdivazim/Audiergon.git
 cd Audiergon
 pip install .
 ```
+Or install via pip:
+```bash
+pip install audiergon[app]
+```
 Go into `audiergon/apps` and try out any of the available apps.
 
 ### Cloud Audiergon (WIP)

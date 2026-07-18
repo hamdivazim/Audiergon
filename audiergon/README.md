@@ -57,7 +57,7 @@ print("Frequency spectrum coefficients:", frequency_coefficients)
 print("Calculated bin frequencies (Hz):", frequencies)
 ```
 
-### 2 - Equalizing an Audio File
+### 2 - Equalising an Audio File
 
 Process an audio track using the built-in Overlap-Add (OLA) processing pipeline.
 
