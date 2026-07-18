@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-const DEFAULT_API_URL = process.env.NEXT_PUBLIC_API_URL;
+const DEFAULT_API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
 const fileToBase64 = (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
