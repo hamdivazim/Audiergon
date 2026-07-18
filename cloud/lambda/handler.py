@@ -37,7 +37,7 @@ def handler(event, context):
             
             duration = nframes / float(framerate)
             
-            if duration > 5.0: # <-- Change this if you want a larger audio length limit. You may also have to increase Lambda memory allocation (even with 5s it takes 27s to process in my experience!)
+            if duration > 5.1: # <-- Change this if you want a larger audio length limit. You may also have to increase Lambda memory allocation (even with 5s it takes 27s with 512mb to process in my experience!)
                 raise ValueError("Audio exceeds 5 second limit")
             if nchannels != 1 or sampwidth != 2:
                 raise ValueError("Audio must be 16 bit Mono PCM WAV")
