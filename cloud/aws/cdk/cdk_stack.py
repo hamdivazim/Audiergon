@@ -56,4 +56,10 @@ class AudiergonCDKStack(Stack):
             integration=lambda_integration
         )
 
+        cfn_stage = http_api.default_stage.node.default_child
+        cfn_stage.default_route_settings = apigw.CfnStage.RouteSettingsProperty(
+            throttling_burst_limit=5,
+            throttling_rate_limit=2
+        )
+
         CfnOutput(self, "ApiUrl", value=http_api.url or "Deployment failed")

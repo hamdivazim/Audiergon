@@ -40,6 +40,7 @@ export default function Home() {
   const validateAndProcess = async () => {
     if (!file) return setError('Please choose a file first.');
     setError('');
+    loading && setLoading(false);
     setLoading(true);
     setProcessedAudioUrl(null);
 
@@ -133,16 +134,27 @@ export default function Home() {
         </header>
 
         {showSettings && (
-          <div className="mb-6 p-4 rounded-xl bg-slate-900/60 border border-slate-700/80 space-y-2 text-sm animate-in fade-in duration-200">
-            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400">
-              API Gateway Endpoint
-            </label>
+          <div className="mb-6 p-4 rounded-xl bg-slate-900/60 border border-slate-700/80 space-y-3 text-sm animate-in fade-in duration-200">
+            <div className="flex justify-between items-center">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                API Gateway Endpoint
+              </label>
+              {apiUrl !== DEFAULT_API_URL && (
+                <button
+                  type="button"
+                  onClick={() => setApiUrl(DEFAULT_API_URL)}
+                  className="text-xs font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
+                >
+                  Reset to Default
+                </button>
+              )}
+            </div>
             <input 
-              type="url" 
-              value={apiUrl}
-              onChange={(e) => setApiUrl(e.target.value)}
-              placeholder="https://your-custom-gateway/equalise"
-              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-xs font-mono text-cyan-300 focus:outline-none focus:border-cyan-500 transition-colors"
+              type="text" 
+              value={apiUrl === DEFAULT_API_URL ? '' : apiUrl}
+              onChange={(e) => setApiUrl(e.target.value || DEFAULT_API_URL)}
+              placeholder="Using Default API Endpoint"
+              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-xs font-mono text-cyan-300 focus:outline-none focus:border-cyan-500 transition-colors placeholder:text-slate-500 placeholder:italic"
             />
           </div>
         )}
