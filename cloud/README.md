@@ -1,6 +1,9 @@
 # Audiergon Cloud
 You can use my [hosted instance](https://audiergon.hamdtel.co.uk/) online at any time, or you can host your own.
 
+## AWS Architecture
+For an explanation on how Audiergon Cloud was architected with AWS, check out `cloud\aws\ARCHITECTURE.md`
+
 ## Prerequisites
 * Node.js
 * AWS CLI configured with your credentials (`aws configure`)
@@ -11,7 +14,9 @@ You can use my [hosted instance](https://audiergon.hamdtel.co.uk/) online at any
 Navigate to your CDK directory and install the required packages:
 ```bash
 cd cdk
-npm install
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 Bootstrap CDK if you have never used it in your current region:
 ```bash

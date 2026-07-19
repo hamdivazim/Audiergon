@@ -9,7 +9,8 @@
   <h5> 
     <a href="https://github.com/hamdivazim/Audiergon">💻 GitHub Repo</a> | 
     <a href="https://pypi.org/project/audiergon/">🐍 PyPI Page</a> | 
-    <a href="https://audiergon.readthedocs.io/en/latest/">📝 Docs</a>
+    <a href="https://audiergon.readthedocs.io/en/latest/">📝 Docs</a> |
+    <a href="https://audiergon.hamdtel.co.uk/">☁️ Audiergon Cloud</a>
   </h5>
 </div>
 
@@ -104,7 +105,7 @@ ffmpeg -i in.mp3 -acodec pcm_s16le -ac 1 -ar 44100 out.wav
 * `generate_hann_window(frame_size)`
     * Generates a list containing real Hann coefficients to smooth frame boundary edges.
 * `apply_equaliser(transformed, frame_size, framerate, ...)`
-    * Sirectly apply scale gains on an existing complex frequency domain segment.
+    * Directly apply scale gains on an existing complex frequency domain segment.
 
 ### `audiergon.bit_reverse`
 

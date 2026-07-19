@@ -4,7 +4,7 @@ Local Audiergon App
 https://github.com/hamdivazim/Audiergon
 """
 
-__version__ = "0.2.0"
+__version__ = "1.0.0"
 
 import gradio as gr
 import numpy as np
@@ -141,6 +141,12 @@ a[download] svg, .download-button svg, button[title="Download"] svg, .download s
     stroke: #a3e2e2 !important;
     color: #a3e2e2 !important;
 }
+
+.icon-buttons, [data-testid="block-info"] + div {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+}
 """
 
 retro_theme = gr.themes.Monochrome(
@@ -180,7 +186,12 @@ with gr.Blocks(title="Audiergon", theme=retro_theme, css=custom_css) as demo:
                 btn_eq = gr.Button("Process Audio", variant="primary")
             
             with gr.Column():
-                eq_output = gr.Audio(type="filepath", label="Processed Audio")
+                eq_output = gr.Audio(
+                    type="filepath", 
+                    label="Processed Audio", 
+                    interactive=False,
+                    show_download_button=True
+                )
                 
         btn_eq.click(
             fn=process_audio,

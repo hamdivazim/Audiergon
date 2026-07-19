@@ -3,15 +3,33 @@
 </div>
 
 <div align="center">
-    <h1>Audiergon</h1>
+  <h1>Audiergon</h1>
 </div>
 
 <div align="center">
-    <h5> 
-        <a href="https://audiergon.hamdtel.co.uk/">☁️ Cloud Demo</a> | 
-        <a href="https://pypi.org/project/audiergon/">🐍 PyPI page</a> | 
-        <a href="https://youtube.com/playlist?list=PLAbLVCg6_PqQ&si=2yWFeVAcUrOT_ob_">▶️ YouTube Series</a> | 
-        <a href="https://audiergon.readthedocs.io/en/latest/">📝 Docs</a>
+
+  <a href="https://pypi.org/project/audiergon/">
+    <img src="https://img.shields.io/pypi/v/audiergon?color=a3e2e2&style=flat-square" alt="PyPI Version">
+  </a>
+
+  <a href="https://pypi.org/project/audiergon/">
+    <img src="https://img.shields.io/pypi/pyversions/audiergon?color=245e5e&style=flat-square" alt="Python Versions">
+  </a>
+
+  <a href="LICENSE">
+    <img src="https://img.shields.io/github/license/hamdivazim/Audiergon?color=245e5e&style=flat-square" alt="License">
+  </a>
+
+  <a href="https://github.com/hamdivazim/Audiergon/stargazers">
+    <img src="https://img.shields.io/github/stars/hamdivazim/Audiergon?color=a3e2e2&style=flat-square" alt="GitHub Stars">
+  </a>
+
+</div>
+
+<div align="center">
+  <h5> 
+    <a href="https://audiergon.hamdtel.co.uk/">☁️ Cloud Demo</a> | 
+    <a href="https://youtube.com/playlist?list=PLAbLVCg6_PqQ&si=2yWFeVAcUrOT_ob_">▶️ YouTube Series</a> | <a href="https://audiergon.readthedocs.io/en/latest/">📝 Docs</a>
   </h5>
 </div>
 
@@ -24,7 +42,9 @@ Audiergon has two main parts: Audiergon local and Audiergon cloud.
     * `apps/` contains the Gradio interface for EQ Control and Fourier Analysis, as well as standalone Fourier Analysis tools
     * `docs/` contains the ReadTheDocs configuration information for the documentation.
 * You can find the cloud implementation of Audiergon in the `cloud/` directory.
-    * WIP: Writing the CDK template and frontend for EQ Control in the cloud.
+    * `cloud/aws` contains the backend CDK stack code and architecture documentation
+    * `cloud/lambda` contains the code for the Lambda handler
+    * `cloud/frontend` contains the frontend Next.js UI and instructions to self host the frontend too
 
 ## Project Features
 
@@ -84,7 +104,9 @@ You can use my [hosted instance](https://audiergon.hamdtel.co.uk/) online at any
 Navigate to your CDK directory and install the required packages:
 ```bash
 cd cdk
-npm install
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 Bootstrap CDK if you have never used it in your current region:
 ```bash

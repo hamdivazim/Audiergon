@@ -22,7 +22,7 @@ def handler(event, context):
         if not base64_audio:
             return {"statusCode": 400, "body": json.dumps({"error": "Missing audio data"})}
             
-        if len(base64_audio) > 2097152:
+        if len(base64_audio) > 2097152: # <-- Currently this imposes a 1.5MB filesize limit. Remove or change as you wish!
             return {"statusCode": 413, "body": json.dumps({"error": "File payload too large. Max size is 1.5MB."})}
 
         audio_bytes = base64.b64decode(base64_audio)
